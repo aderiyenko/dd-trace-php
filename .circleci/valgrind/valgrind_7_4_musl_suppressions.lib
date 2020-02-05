@@ -87,6 +87,7 @@
     fun:zend_compile
     fun:compile_file
     fun:phar_compile_file
+    fun:_dd_compile_file_ex
     fun:_dd_compile_file
     fun:zend_execute_scripts
     fun:php_execute_script
@@ -104,6 +105,7 @@
     obj:*
     fun:compile_file
     obj:*
+    fun:_dd_compile_file_ex
     fun:_dd_compile_file
     fun:zend_execute_scripts
     fun:php_execute_script

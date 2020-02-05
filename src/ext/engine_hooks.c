@@ -32,12 +32,18 @@ static uint64_t _get_microseconds() {
     return 0U;
 }
 
-static zend_op_array *_dd_compile_file(zend_file_handle *file_handle, int type TSRMLS_DC) {
+static zend_op_array *_dd_compile_file_ex(const char *filename, zend_file_handle *file_handle, int type TSRMLS_DC) {
+    PHP5_UNUSED(filename);
+    PHP7_UNUSED(filename);
     zend_op_array *res;
     uint64_t start = _get_microseconds();
     res = _prev_compile_file(file_handle, type TSRMLS_CC);
     DDTRACE_G(compile_time_microseconds) += (int64_t)(_get_microseconds() - start);
     return res;
+}
+
+static zend_op_array *_dd_compile_file(zend_file_handle *file_handle, int type TSRMLS_DC) {
+    return _dd_compile_file_ex(file_handle->filename, file_handle, type TSRMLS_CC);
 }
 
 static void _compile_minit(void) {
